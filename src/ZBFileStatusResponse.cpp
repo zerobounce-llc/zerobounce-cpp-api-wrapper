@@ -17,7 +17,7 @@ std::string ZBFileStatusResponse::toString()
                 ", returnUrl='" << returnUrl << '\'' <<
                 ", errorReason='" << errorReason << '\'' <<
                 '}';
-        
+
     return stringStream.str();
 }
 
@@ -33,7 +33,7 @@ ZBFileStatusResponse ZBFileStatusResponse::from_json(const json& j) {
     r.fileStatus = getOrDefault<std::string>(j, "file_status", "");
     r.completePercentage = getOrDefault<std::string>(j, "complete_percentage", "");
     r.returnUrl = getOrDefault<std::string>(j, "return_url", "");
-    
+
     return r;
 }
 

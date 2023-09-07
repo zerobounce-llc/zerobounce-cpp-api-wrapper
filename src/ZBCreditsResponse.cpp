@@ -9,7 +9,7 @@ std::string ZBCreditsResponse::toString()
     stringStream << "ZBCreditsResponse{" <<
                 "credits='" << credits << '\'' <<
                 '}';
-        
+
     return stringStream.str();
 }
 

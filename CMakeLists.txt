@@ -12,13 +12,13 @@ include(FetchContent)
 
 # Download and build libcpr
 FetchContent_Declare(
-    cpr 
+    cpr
     GIT_REPOSITORY https://github.com/libcpr/cpr.git
     GIT_TAG 1.10.2
 )
 # Download and build nlohmann_json
 FetchContent_Declare(
-    nlohmann_json 
+    nlohmann_json
     URL https://github.com/nlohmann/json/releases/download/v3.11.2/json.tar.xz
 )
 # Download and build googletest

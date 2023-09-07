@@ -11,7 +11,7 @@ std::string ZBGetFileResponse::toString()
                 ", message='" << message << '\'' <<
                 ", localFilePath='" << localFilePath << '\'' <<
                 '}';
-        
+
     return stringStream.str();
 }
 
@@ -20,7 +20,7 @@ ZBGetFileResponse ZBGetFileResponse::from_json(const json& j) {
 
     r.success = getOrDefault<bool>(j, "success", false);
     r.message = getOrDefault<std::string>(j, "message", "");
-    
+
     return r;
 }
 

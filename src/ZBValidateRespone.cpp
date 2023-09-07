@@ -52,7 +52,7 @@ ZBValidateResponse ZBValidateResponse::from_json(const json& j) {
     r.domain = getOrDefault<std::string>(j, "domain", "");
     r.domainAgeDays = getOrDefault<std::string>(j, "domain_age_days", "");
     r.smtpProvider = getOrDefault<std::string>(j, "smtp_provider", "");
-    
+
     bool mxFound;
     std::istringstream ss(getOrDefault<std::string>(j, "mx_found", "false"));
     ss >> std::boolalpha >> mxFound;
@@ -68,7 +68,7 @@ ZBValidateResponse ZBValidateResponse::from_json(const json& j) {
     r.zipCode = getOrDefault<std::string>(j, "zipcode", "");
     r.processedAt = getOrDefault<std::string>(j, "processed_at", "");
     r.error = getOrDefault<std::string>(j, "error", "");
-    
+
     return r;
 }
 

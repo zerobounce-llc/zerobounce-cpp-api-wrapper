@@ -16,11 +16,11 @@ std::string ZBSendFileResponse::toString()
             stringStream << ", ";
         }
     }
-    
+
     stringStream << '\'' <<
                 ", fileName='" << fileName << '\'' <<
                 ", fileId='" << fileId << '\'' << '}';
-        
+
     return stringStream.str();
 }
 
@@ -38,7 +38,7 @@ ZBSendFileResponse ZBSendFileResponse::from_json(const json& j) {
 
     r.fileName = j.value("file_name", "");
     r.fileId = j.value("file_id", "");
-    
+
     return r;
 }
 

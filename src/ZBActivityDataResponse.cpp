@@ -11,7 +11,7 @@ std::string ZBActivityDataResponse::toString()
                 ", activeInDays='" << activeInDays << '\'' <<
                 ", error='" << error << '\'' <<
                 '}';
-        
+
     return stringStream.str();
 }
 

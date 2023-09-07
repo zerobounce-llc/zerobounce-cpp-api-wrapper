@@ -12,7 +12,7 @@ std::string ZBDeleteFileResponse::toString()
                 ", fileName='" << fileName << '\'' <<
                 ", fileId='" << fileId << '\'' <<
                 '}';
-        
+
     return stringStream.str();
 }
 
@@ -23,7 +23,7 @@ ZBDeleteFileResponse ZBDeleteFileResponse::from_json(const json& j) {
     r.message = getOrDefault<std::string>(j, "message", "");
     r.fileName = getOrDefault<std::string>(j, "file_name", "");
     r.fileId = getOrDefault<std::string>(j, "file_id", "");
-    
+
     return r;
 }
 

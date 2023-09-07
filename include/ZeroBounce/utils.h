@@ -8,7 +8,7 @@ using json = nlohmann::json;
 /**
  * Function used to get the value of a given key in a json.
  * If the key doesn't exist or it's null, a default value is returned.
- * 
+ *
  * @tparam T type of the returned value
  * @param j json object
  * @param key name of the field

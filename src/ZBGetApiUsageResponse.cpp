@@ -43,7 +43,7 @@ std::string ZBGetApiUsageResponse::toString()
                 ", endDate='" << endDate << '\'' <<
                 ", error='" << error << '\'' <<
                 '}';
-        
+
     return stringStream.str();
 }
 
@@ -85,7 +85,7 @@ ZBGetApiUsageResponse ZBGetApiUsageResponse::from_json(const json& j) {
     r.startDate = getOrDefault<std::string>(j, "start_date", "");
     r.endDate = getOrDefault<std::string>(j, "end_date", "");
     r.error = getOrDefault<std::string>(j, "error", "");
-    
+
     return r;
 }
 

@@ -46,7 +46,7 @@ Ten en cuenta que es posible que la biblioteca requiera algunos archivos .dll (q
 Incluye la biblioteca en tu archivo:
 ```cpp
 ###include <ZeroBounce/ZeroBounce.h>
-``` 
+```
 
 Inicializa el envoltorio con tu clave de API:
 ```cpp

@@ -50,7 +50,7 @@ Be aware that the library may require some .dll files (found in the `build` dire
 Include the library in your file:
 ```cpp
 #include <ZeroBounce/ZeroBounce.h>
-``` 
+```
 
 Initialize the wrapper with your api key:
 ```cpp

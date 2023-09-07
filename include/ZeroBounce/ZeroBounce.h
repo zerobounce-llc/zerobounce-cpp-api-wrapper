@@ -15,6 +15,7 @@
 #include "ZeroBounce/ZBGetFileResponse.h"
 #include "ZeroBounce/ZBDeleteFileResponse.h"
 #include "ZeroBounce/ZBActivityDataResponse.h"
+#include "ZeroBounce/ZBFindEmailResponse.h"
 
 #include <cpr/cpr.h>
 
@@ -181,15 +182,15 @@ class ZeroBounce {
             OnSuccessCallback<ZBDeleteFileResponse> successCallback,
             OnErrorCallback errorCallback
         );
-    
+
     public:
         ZeroBounce();
         ZeroBounce(const ZeroBounce& obj) = delete;
 
         /**
          * Get pointer to ZeroBounce instance.
-         * 
-         * @return ZeroBounce* 
+         *
+         * @return ZeroBounce*
          */
         static ZeroBounce* getInstance();
 
@@ -382,6 +383,44 @@ class ZeroBounce {
         void getActivityData(
             std::string email,
             OnSuccessCallback<ZBActivityDataResponse> successCallback,
+            OnErrorCallback errorCallback
+        );
+
+        /**
+         * @brief Email Address Search - Identifies and validates a person’s primary email address
+         *
+         * @param zb                ZeroBounce pointer
+         * @param domain            The email domain for which to find the email format
+         * @param first_name        The first name of the person whose email format is being searched
+         * @param middle_name       The middle name of the person whose email format is being searched
+         * @param last_name         The last name of the person whose email format is being searched
+         * @param success_callback  success callback
+         * @param error_callback    error callback
+         */
+        void findEmail(
+            std::string domain,
+            std::string first_name,
+            std::string middle_name,
+            std::string last_name,
+            OnSuccessCallback<ZBFindEmailResponse> successCallback,
+            OnErrorCallback errorCallback
+        );
+
+        /**
+         * @brief Email Address Search - Identifies and validates a person’s primary email address
+         *
+         * @param zb                ZeroBounce pointer
+         * @param domain            The email domain for which to find the email format
+         * @param first_name        The first name of the person whose email format is being searched
+         * @param last_name         The last name of the person whose email format is being searched
+         * @param success_callback  success callback
+         * @param error_callback    error callback
+         */
+        void findEmail(
+            std::string domain,
+            std::string first_name,
+            std::string last_name,
+            OnSuccessCallback<ZBFindEmailResponse> successCallback,
             OnErrorCallback errorCallback
         );
 };

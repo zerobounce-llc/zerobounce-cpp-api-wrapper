@@ -17,7 +17,7 @@ struct ZBEmailToValidate {
     std::string emailAddress;
     std::string ipAddress;
 
-    ZBEmailToValidate(const std::string& email, const std::string& ip = "") 
+    ZBEmailToValidate(const std::string& email, const std::string& ip = "")
         : emailAddress(email), ipAddress(ip) {}
 };
 

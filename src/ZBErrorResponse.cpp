@@ -24,9 +24,9 @@ std::string ZBErrorResponse::toString()
             stringStream << ", ";
         }
     }
-                
+
     stringStream << "]}";
-        
+
     return stringStream.str();
 }
 

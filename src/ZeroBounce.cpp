@@ -123,7 +123,7 @@ void ZeroBounce::validateBatch(
             },
             cpr::Body{payload.dump()}
         );
-        
+
         std::string rsp = reqResponse.text;
 
         if (reqResponse.status_code > 299) {
@@ -238,7 +238,7 @@ void ZeroBounce::sendRequest(
             cpr::Url{urlPath},
             cpr::Header{{"Accept", "application/json"}}
         );
-        
+
         std::string rsp = reqResponse.text;
 
         if (reqResponse.status_code > 299) {
@@ -295,7 +295,7 @@ void ZeroBounce::sendFileInternal(
         if (!options.returnUrl.empty()) {
                 multipart.parts.emplace_back(cpr::Part{"return_url", options.returnUrl});
         }
-        
+
         multipart.parts.emplace_back(cpr::Part{"has_header_row", options.hasHeaderRow});
         multipart.parts.emplace_back(cpr::Part{"remove_duplicate", options.removeDuplicate});
 
@@ -352,7 +352,7 @@ void ZeroBounce::getFileInternal(
     try {
         std::string urlPath = (scoring ? bulkApiScoringBaseUrl : bulkApiBaseUrl)
             + "/getfile?api_key=" + apiKey + "&file_id=" + fileId;
-        
+
         cpr::Response reqResponse = requestHandler->Get(cpr::Url{urlPath});
 
         std::string contentType = reqResponse.header["Content-Type"];
@@ -411,5 +411,42 @@ void ZeroBounce::deleteFileInternal(
             + "&file_id=" + fileId,
         successCallback,
         errorCallback
+    );
+}
+
+void ZeroBounce::findEmail(
+    std::string domain,
+    std::string first_name,
+    std::string middle_name,
+    std::string last_name,
+    OnSuccessCallback<ZBFindEmailResponse> successCallback,
+    OnErrorCallback errorCallback
+) {
+    std::stringstream urlStream;
+    urlStream << apiBaseUrl << "/guessformat?api_key==" << apiKey;
+    if (domain.size() > 0) {
+        urlStream << "&domain=" << domain;
+    }
+    if (first_name.size() > 0) {
+        urlStream << "&first_name=" << first_name;
+    }
+    if (middle_name.size() > 0) {
+        urlStream << "&middle_name=" << middle_name;
+    }
+    if (last_name.size() > 0) {
+        urlStream << "&last_name=" << last_name;
+    }
+    sendRequest(urlStream.str(), successCallback, errorCallback);
+}
+
+void ZeroBounce::findEmail(
+    std::string domain,
+    std::string first_name,
+    std::string last_name,
+    OnSuccessCallback<ZBFindEmailResponse> successCallback,
+    OnErrorCallback errorCallback
+) {
+    ZeroBounce::findEmail(
+        domain, first_name, "", last_name, successCallback, errorCallback
     );
 }

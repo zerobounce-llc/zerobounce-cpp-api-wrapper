@@ -17,7 +17,7 @@ ZBValidateError ZBValidateError::from_json(const json& j) {
 
     r.error = getOrDefault<std::string>(j, "error", "");
     r.emailAddress = getOrDefault<std::string>(j, "email_address", "");
-    
+
     return r;
 }
 
@@ -30,7 +30,7 @@ std::string ZBValidateBatchResponse::toString()
 {
     std::stringstream stringStream;
     stringStream << "ZBValidateBatchResponse{" << "emailBatch=[";
-    
+
     for (auto it = emailBatch.begin(); it != emailBatch.end(); ++it) {
         stringStream << it->toString(true);
         if (std::next(it) != emailBatch.end()) {
@@ -64,7 +64,7 @@ ZBValidateBatchResponse ZBValidateBatchResponse::from_json(const json& j) {
         ZBValidateError error = ZBValidateError::from_json(errorObj);
         r.errors.push_back(error);
     }
-    
+
     return r;
 }
 

@@ -57,7 +57,7 @@ ZeroBounceTest* ZeroBounceTest::instance = nullptr;
 
 /**
  * Function that creates a mock response to be returned by http requests.
- * 
+ *
  * @param content           content of the response
  * @param statusCode        status code of the response
  * @param contentType       content type of the response
@@ -120,7 +120,7 @@ TEST_F(Tests, testGetCreditsValid) {
     mockRequestHandler->setResponse(reqResponse);
 
     ZBCreditsResponse expectedResponse = ZBCreditsResponse::from_json(json::parse(responseJson));
-    
+
     ZeroBounceTest::getInstance()->getCredits(
         [&](ZBCreditsResponse response) {
             ASSERT_EQ(response, expectedResponse);
@@ -273,7 +273,7 @@ TEST_F(Tests, testSingleEmailValidateValid) {
     mockRequestHandler->setResponse(reqResponse);
 
     ZBValidateResponse expectedResponse = ZBValidateResponse::from_json(json::parse(responseJson));
-    
+
     ZeroBounceTest::getInstance()->validate(
         "valid@example.com",
         "127.0.0.1",
@@ -496,7 +496,7 @@ TEST_F(Tests, testGetFileInvalid) {
 }
 
 TEST_F(Tests, testGetFileValid) {
-    std::string responseJson = 
+    std::string responseJson =
         R"("Email Address","First Name","Last Name","Gender","ZB Status","ZB Sub Status","ZB Account","ZB Domain","ZB First Name","ZB Last Name","ZB Gender","ZB Free Email","ZB MX Found","ZB MX Record","ZB SMTP Provider","ZB Did You Mean"
         "valid@example.com","zero","bounce","","valid","","","","zero","bounce","male","False","true","mx.example.com","example",""
         )";
@@ -682,7 +682,7 @@ TEST_F(Tests, testScoringGetFileInvalid) {
 }
 
 TEST_F(Tests, testScoringGetFileValid) {
-    std::string responseJson = 
+    std::string responseJson =
         R"("email","firstname","lastname","ZeroBounceQualityScore"
         "valid@example.com","zero","bounce","10")";
 
@@ -778,6 +778,77 @@ TEST_F(Tests, testActivityDataValid) {
     ZeroBounceTest::getInstance()->getActivityData(
         "valid@example.com",
         [&](ZBActivityDataResponse response) {
+            ASSERT_EQ(response, expectedResponse);
+        },
+        [&](ZBErrorResponse errorResponse) {
+            FAIL() << errorResponse.toString();
+        }
+    );
+}
+
+TEST_F(Tests, testFindMailStatusInvalid) {
+    std::string responseJson = "{\n"
+        "    \"email\": \"\",\n"
+        "    \"domain\": \"example.com\",\n"
+        "    \"format\": \"unknown\",\n"
+        "    \"status\": \"invalid\",\n"
+        "    \"sub_status\": \"no_dns_entries\",\n"
+        "    \"confidence\": \"undetermined\",\n"
+        "    \"did_you_mean\": \"\",\n"
+        "    \"failure_reason\": \"\",\n"
+        "    \"other_domain_formats\": []\n"
+        "}";
+
+    cpr::Response reqResponse = mockResponse(responseJson, 200);
+    mockRequestHandler->setResponse(reqResponse);
+
+    ZBFindEmailResponse expectedResponse = ZBFindEmailResponse::from_json(json::parse(responseJson));
+
+    ZeroBounce::getInstance()->findEmail(
+        "example.com",
+        "John",
+        "Doe",
+        [&](ZBFindEmailResponse response) {
+            ASSERT_EQ(response, expectedResponse);
+        },
+        [&](ZBErrorResponse errorResponse) {
+            FAIL() << errorResponse.toString();
+        }
+    );
+}
+
+TEST_F(Tests, testFindMailStatusValid) {
+    std::string responseJson = "{\n"
+        "    \"email\": \"john.doe@example.com\",\n"
+        "    \"domain\": \"example.com\",\n"
+        "    \"format\": \"first.last\",\n"
+        "    \"status\": \"valid\",\n"
+        "    \"sub_status\": \"\",\n"
+        "    \"confidence\": \"high\",\n"
+        "    \"did_you_mean\": \"\",\n"
+        "    \"failure_reason\": \"\",\n"
+        "    \"other_domain_formats\": [\n"
+        "        {\n"
+        "            \"format\": \"first_last\",\n"
+        "            \"confidence\": \"high\"\n"
+        "        },\n"
+        "        {\n"
+        "            \"format\": \"first\",\n"
+        "            \"confidence\": \"medium\"\n"
+        "        }\n"
+        "    ]\n"
+        "}";
+
+    cpr::Response reqResponse = mockResponse(responseJson, 200);
+    mockRequestHandler->setResponse(reqResponse);
+
+    ZBFindEmailResponse expectedResponse = ZBFindEmailResponse::from_json(json::parse(responseJson));
+
+    ZeroBounce::getInstance()->findEmail(
+        "example.com",
+        "John",
+        "Doe",
+        [&](ZBFindEmailResponse response) {
             ASSERT_EQ(response, expectedResponse);
         },
         [&](ZBErrorResponse errorResponse) {

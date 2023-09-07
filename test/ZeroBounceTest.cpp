@@ -804,7 +804,7 @@ TEST_F(Tests, testFindMailStatusInvalid) {
 
     ZBFindEmailResponse expectedResponse = ZBFindEmailResponse::from_json(json::parse(responseJson));
 
-    ZeroBounce::getInstance()->findEmail(
+    ZeroBounceTest::getInstance()->findEmail(
         "example.com",
         "John",
         "Doe",
@@ -844,7 +844,7 @@ TEST_F(Tests, testFindMailStatusValid) {
 
     ZBFindEmailResponse expectedResponse = ZBFindEmailResponse::from_json(json::parse(responseJson));
 
-    ZeroBounce::getInstance()->findEmail(
+    ZeroBounceTest::getInstance()->findEmail(
         "example.com",
         "John",
         "Doe",

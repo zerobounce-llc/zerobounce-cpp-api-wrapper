@@ -423,7 +423,7 @@ void ZeroBounce::findEmail(
     OnErrorCallback errorCallback
 ) {
     std::stringstream urlStream;
-    urlStream << apiBaseUrl << "/guessformat?api_key==" << apiKey;
+    urlStream << apiBaseUrl << "/guessformat?api_key=" << apiKey;
     if (domain.size() > 0) {
         urlStream << "&domain=" << domain;
     }

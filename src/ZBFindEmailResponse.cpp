@@ -1,6 +1,15 @@
 #include "ZeroBounce/utils.h"
 #include "ZeroBounce/ZBFindEmailResponse.h"
 
+std::string ZBDomainFormat::toString() {
+    std::stringstream stringStream;
+    stringStream << "ZBFindEmailResponse{ " <<
+        "confidence=" << '"' << this->confidence << '"' << ", "
+        "format=" << '"' << this->format << '"' << "}";
+
+    return stringStream.str();
+}
+
 ZBDomainFormat ZBDomainFormat::from_json(const json& json_obj) {
     ZBDomainFormat response;
     response.format = getOrDefault<std::string>(json_obj, "format", "");
@@ -12,6 +21,28 @@ bool ZBDomainFormat::operator==(const ZBDomainFormat& other) const {
     return this->confidence == other.confidence && this->format == other.format;
 }
 
+std::string ZBFindEmailResponse::toString() {
+    std::stringstream stringStream;
+    stringStream << "ZBFindEmailResponse{ " <<
+        "email=" << '"' << this->email << '"' << ", "
+        "domain=" << '"' << this->domain << '"' << ", "
+        "format=" << '"' << this->format << '"' << ", "
+        "status=" << '"' << this->status << '"' << ", "
+        "subStatus=" << '"' << this->subStatus << '"' << ", "
+        "confidence=" << '"' << this->confidence << '"' << ", "
+        "didYouMean=" << '"' << this->didYouMean << '"' << ", "
+        "failureReason=" << '"' << this->failureReason << '"' << ", "
+        "otherDomainFormats=" << '[';
+
+    if (this->otherDomainFormats.size() > 0) {
+        stringStream << this->otherDomainFormats[0].toString();
+    }
+    for (int index = 1; index < this->otherDomainFormats.size(); index ++) {
+        stringStream << ", " << this->otherDomainFormats[index].toString();
+    }
+    stringStream << "] }";
+    return stringStream.str();
+}
 
 ZBFindEmailResponse ZBFindEmailResponse::from_json(const json& json_obj) {
     ZBFindEmailResponse response;

@@ -18,6 +18,8 @@ public:
     std::string format;
     std::string confidence;
 
+    std::string toString();
+
     static ZBDomainFormat from_json(const json& json_obj);
 
     bool operator==(const ZBDomainFormat& other) const;
@@ -39,6 +41,8 @@ public:
     std::string didYouMean;
     std::string failureReason;
     std::vector<ZBDomainFormat> otherDomainFormats;
+
+    std::string toString();
 
     static ZBFindEmailResponse from_json(const json& json_obj);
 

@@ -810,6 +810,7 @@ TEST_F(Tests, testFindMailStatusInvalid) {
         "Doe",
         [&](ZBFindEmailResponse response) {
             ASSERT_EQ(response, expectedResponse);
+            ASSERT_EQ(response.toString(), expectedResponse.toString());
         },
         [&](ZBErrorResponse errorResponse) {
             FAIL() << errorResponse.toString();
@@ -850,6 +851,7 @@ TEST_F(Tests, testFindMailStatusValid) {
         "Doe",
         [&](ZBFindEmailResponse response) {
             ASSERT_EQ(response, expectedResponse);
+            ASSERT_EQ(response.toString(), expectedResponse.toString());
         },
         [&](ZBErrorResponse errorResponse) {
             FAIL() << errorResponse.toString();

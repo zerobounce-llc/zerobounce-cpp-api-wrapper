@@ -286,6 +286,20 @@ ZeroBounce::getInstance()->scoringDeleteFile(
 );
 ```
 
+* ####### Email finder allows you to identify the correct email format when you provide a name and email domain
+
+```cpp
+ZeroBounce::getInstance()->findEmail(
+    scoringFileId,
+    [](ZBFindEmailResponse response) {
+        cout << response.toString() << endl;
+    },
+    [](ZBErrorResponse errorResponse) {
+        cout << errorResponse.toString() << endl;
+    }
+);
+```
+
 #### DEVELOPMENT
 
 It is recommended that the development should be done on Linux.
